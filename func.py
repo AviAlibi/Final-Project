@@ -400,7 +400,6 @@ def render_states_barh_overlay(states_df: pd.DataFrame):
     plt.tight_layout()
     plt.savefig('./img/predicted_pops_2020_vs_2030.png')
 
-
 def state_data_assembly(STATES:pd.DataFrame) -> pd.DataFrame:
     '''Takes in STATES:pd.DataFrame and adds on all its acccessory columns, does not make any predictions for any of this data'''
     STATES = emissions_constructor(STATES=STATES)
