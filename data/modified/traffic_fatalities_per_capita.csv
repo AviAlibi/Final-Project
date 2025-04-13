@@ -1,0 +1,501 @@
+Year,State,Traffic Fatalities
+2015,Texas,9976
+2021,Ohio,9919
+2014,Texas,9723
+2022,Ohio,9682
+2020,Pennsylvania,9565
+2017,Pennsylvania,9527
+2020,Ohio,9436
+2014,Florida,9433
+2017,Ohio,8971
+2005,Florida,8868
+2022,North Carolina,8858
+2020,New York,8756
+2005,Texas,8598
+2019,Pennsylvania,8596
+2018,Pennsylvania,8585
+2021,North Carolina,8539
+2016,Pennsylvania,8410
+2019,Ohio,8287
+2016,Ohio,7999
+2018,Ohio,7755
+2017,New York,7687
+2021,Illinois,7664
+2022,Illinois,7597
+2018,New York,7415
+2019,New York,7390
+2020,North Carolina,7379
+2016,New York,7354
+2015,Pennsylvania,7324
+2020,Illinois,7170
+2022,Tennessee,7114
+2021,Tennessee,7076
+2015,Ohio,6756
+2014,Pennsylvania,6640
+2021,Michigan,6541
+2022,Georgia,6519
+2015,New York,6515
+2022,Michigan,6425
+2021,Georgia,6353
+2019,North Carolina,6190
+2014,Ohio,6178
+2020,Tennessee,6107
+2020,Michigan,6097
+2019,Illinois,6095
+2017,Illinois,6019
+2018,Illinois,6016
+2018,North Carolina,6007
+2017,North Carolina,5985
+2021,Arizona,5961
+2014,New York,5945
+2022,Arizona,5928
+2017,Michigan,5623
+2018,Michigan,5555
+2022,Washington,5546
+2020,Georgia,5517
+2016,Illinois,5508
+2016,North Carolina,5476
+2005,Pennsylvania,5446
+2019,Michigan,5422
+2020,Arizona,5398
+2021,Virginia,5358
+2016,Michigan,5313
+2022,Virginia,5275
+2021,Indiana,5246
+2021,Washington,5120
+2021,New Jersey,5077
+2015,North Carolina,4991
+2022,Indiana,4989
+2022,New Jersey,4956
+2022,Wisconsin,4951
+2022,Missouri,4940
+2019,Tennessee,4856
+2015,Illinois,4850
+2022,South Carolina,4827
+2021,Missouri,4814
+2022,Massachusetts,4783
+2020,New Jersey,4761
+2020,Virginia,4723
+2021,Wisconsin,4717
+2017,Georgia,4712
+2021,South Carolina,4701
+2016,Georgia,4701
+2020,Wisconsin,4682
+2018,New Jersey,4676
+2019,New Jersey,4650
+2015,Michigan,4647
+2005,New York,4645
+2014,Illinois,4644
+2021,Massachusetts,4624
+2020,Indiana,4580
+2019,Georgia,4563
+2019,Arizona,4558
+2014,North Carolina,4558
+2021,Louisiana,4489
+2018,Tennessee,4483
+2017,New Jersey,4482
+2005,Ohio,4438
+2017,Tennessee,4435
+2014,Michigan,4422
+2020,Missouri,4418
+2018,Georgia,4418
+2021,Kentucky,4373
+2015,Georgia,4344
+2022,Louisiana,4320
+2022,Colorado,4268
+2018,Arizona,4251
+2016,Tennessee,4238
+2020,Washington,4216
+2021,Colorado,4206
+2022,Kentucky,4193
+2020,South Carolina,4184
+2017,Arizona,4184
+2005,Illinois,4182
+2005,North Carolina,4123
+2019,Wisconsin,4087
+2020,Massachusetts,4081
+2019,Massachusetts,4052
+2016,Arizona,4010
+2019,Virginia,3994
+2017,Indiana,3978
+2018,Missouri,3975
+2018,Massachusetts,3971
+2014,Georgia,3964
+2020,Kentucky,3950
+2019,Missouri,3950
+2018,Virginia,3936
+2017,Virginia,3922
+2022,Minnesota,3882
+2019,Indiana,3876
+2015,Tennessee,3873
+2016,New Jersey,3839
+2016,Massachusetts,3831
+2017,Massachusetts,3821
+2018,Wisconsin,3786
+2018,Indiana,3782
+2014,Tennessee,3781
+2017,Missouri,3776
+2005,Georgia,3762
+2021,Minnesota,3753
+2017,Wisconsin,3746
+2020,Louisiana,3711
+2016,Virginia,3710
+2020,Colorado,3647
+2016,Missouri,3625
+2016,Wisconsin,3575
+2019,Washington,3569
+2015,Arizona,3539
+2022,Alabama,3524
+2016,Indiana,3496
+2021,Alabama,3491
+2017,Washington,3455
+2005,Michigan,3451
+2015,Virginia,3429
+2022,Oklahoma,3421
+2018,Washington,3396
+2018,South Carolina,3369
+2022,Maryland,3341
+2019,South Carolina,3336
+2014,Arizona,3322
+2020,Minnesota,3319
+2015,Missouri,3309
+2017,Kentucky,3264
+2015,Indiana,3258
+2022,Oregon,3231
+2015,Massachusetts,3229
+2016,Washington,3221
+2015,New Jersey,3218
+2015,Wisconsin,3206
+2016,Kentucky,3194
+2015,Washington,3192
+2021,Oregon,3151
+2005,Arizona,3150
+2017,South Carolina,3147
+2014,Virginia,3147
+2005,Tennessee,3147
+2019,Kentucky,3121
+2014,Missouri,3110
+2019,Colorado,3085
+2005,Louisiana,3072
+2021,Oklahoma,3063
+2021,Maryland,3058
+2018,Kentucky,3051
+2018,Colorado,3049
+2017,Colorado,3037
+2014,Wisconsin,3015
+2016,South Carolina,3012
+2020,Alabama,3006
+2022,California,1168
+2021,California,0879
+2014,Washington,2997
+2014,Indiana,2974
+2014,New Jersey,2970
+2015,Kentucky,2962
+2020,Maryland,2948
+2019,Louisiana,2916
+2016,Colorado,2880
+2019,Minnesota,2859
+2005,Missouri,2848
+2018,Minnesota,2792
+2017,Minnesota,2788
+2018,Louisiana,2781
+2017,Louisiana,2780
+2019,Alabama,2755
+2016,Alabama,2755
+2015,South Carolina,2737
+2015,Colorado,2725
+2016,Louisiana,2710
+2017,Alabama,2703
+2016,Minnesota,2697
+2014,Massachusetts,2692
+2018,Alabama,2682
+2021,Connecticut,2644
+2022,Connecticut,2640
+2005,Virginia,2638
+2020,Oklahoma,2628
+2014,Kentucky,2622
+2018,Oklahoma,2612
+2016,Oklahoma,2592
+2015,Louisiana,2578
+2015,Minnesota,2574
+2017,Oklahoma,2563
+2005,New Jersey,2561
+2015,Alabama,2552
+2005,Washington,2543
+2014,Colorado,2517
+2005,Wisconsin,2490
+2005,Indiana,2480
+2021,West Virginia,2474
+2014,Alabama,2463
+2020,Oregon,2458
+2020,Connecticut,2447
+2019,Oklahoma,2439
+2014,South Carolina,2436
+2019,Maryland,2425
+2021,Mississippi,2423
+2015,Oklahoma,2422
+2014,Oklahoma,2421
+2017,Maryland,2408
+2005,Kentucky,2405
+2005,Alabama,2395
+2014,Minnesota,2385
+2022,Mississippi,2367
+2014,Louisiana,2344
+2018,Maryland,2307
+2005,South Carolina,2272
+2016,Maryland,2271
+2022,West Virginia,2247
+2020,West Virginia,2242
+2019,Oregon,2213
+2020,Mississippi,2210
+2019,Connecticut,2197
+2021,New Mexico,2188
+2022,New Mexico,2126
+2022,Nevada,2110
+2016,Oregon,2105
+2017,Connecticut,2078
+2017,Oregon,2076
+2018,Oregon,2075
+2022,Arkansas,2062
+2018,Connecticut,2054
+2021,Arkansas,2046
+2021,Nevada,2026
+2005,Oklahoma,2005
+2020,California,18357
+2021,Florida,17780
+2022,Florida,17115
+2020,Florida,16135
+2022,Texas,15252
+2019,California,15116
+2021,Texas,14704
+2018,California,14153
+2017,California,13840
+2019,Florida,13348
+2016,California,13213
+2017,Florida,13059
+2020,Texas,12919
+2018,Florida,12670
+2016,Florida,12561
+2015,California,12544
+2014,California,11804
+2019,Texas,11384
+2005,California,11129
+2022,New York,10894
+2017,Texas,10763
+2018,Texas,10646
+2015,Florida,10578
+2016,Texas,10536
+2021,Pennsylvania,10327
+2021,New York,10140
+2022,Pennsylvania,10060
+2015,Oregon,1999
+2022,Kansas,1995
+2016,Connecticut,1978
+2021,Kansas,1963
+2005,Colorado,1947
+2005,Mississippi,1936
+2005,Minnesota,1922
+2005,Massachusetts,1907
+2015,Maryland,1903
+2019,Mississippi,1894
+2017,West Virginia,1892
+2019,West Virginia,1859
+2020,New Mexico,1853
+2022,Iowa,1845
+2020,Arkansas,1824
+2015,Mississippi,1814
+2016,Mississippi,1803
+2014,Oregon,1803
+2015,Connecticut,1799
+2020,Nevada,1761
+2021,Iowa,1745
+2017,Mississippi,1738
+2014,Mississippi,1712
+2018,West Virginia,1707
+2016,West Virginia,1705
+2020,Kansas,1698
+2018,Mississippi,1692
+2019,New Mexico,1687
+2014,Maryland,1674
+2020,Iowa,1647
+2014,Connecticut,1642
+2017,Arkansas,1625
+2016,Iowa,1608
+2016,Arkansas,1604
+2021,Utah,1583
+2017,Kansas,1567
+2018,Nevada,1547
+2019,Iowa,1538
+2015,Arkansas,1538
+2022,Utah,1537
+2015,Iowa,1537
+2017,Iowa,1536
+2014,New Mexico,1534
+2018,Arkansas,1530
+2019,Arkansas,1527
+2019,Kansas,1524
+2014,Iowa,1517
+2015,West Virginia,1516
+2018,New Mexico,1514
+2017,Nevada,1496
+2016,New Mexico,1487
+2018,Iowa,1480
+2015,Kansas,1475
+2005,Oregon,1469
+2018,Kansas,1465
+2020,Utah,1461
+2017,New Mexico,1460
+2014,Arkansas,1458
+2016,Kansas,1444
+2019,Nevada,1437
+2015,New Mexico,1430
+2016,Nevada,1395
+2022,Maine,1391
+2014,West Virginia,1380
+2014,Kansas,1377
+2005,Maryland,1376
+2015,Nevada,1340
+2005,Arkansas,1329
+2019,Utah,1301
+2021,Maine,1286
+2018,Utah,1284
+2005,New Mexico,1267
+2017,Utah,1238
+2015,Utah,1223
+2016,Utah,1211
+2005,Iowa,1202
+2014,Utah,1167
+2014,Nevada,1166
+2022,Idaho,1163
+2021,Idaho,1161
+2020,Maine,1149
+2005,Kansas,1149
+2005,Connecticut,1134
+2005,Nevada,1104
+2022,New Hampshire,1039
+2019,Maine,1027
+2018,Maine,1000
+2017,Maine,990
+2022,Nebraska,989
+2020,Idaho,967
+2018,New Hampshire,959
+2019,Idaho,948
+2021,New Hampshire,946
+2005,West Virginia,940
+2016,New Hampshire,924
+2016,Maine,909
+2017,New Hampshire,907
+2020,Nebraska,903
+2021,Nebraska,897
+2018,Idaho,889
+2022,Delaware,883
+2017,Idaho,876
+2021,Montana,875
+2020,New Hampshire,872
+2021,Rhode Island,869
+2019,New Hampshire,864
+2019,Nebraska,851
+2016,Idaho,849
+2022,Rhode Island,848
+2021,Delaware,817
+2015,New Hampshire,815
+2017,Nebraska,811
+2018,Nebraska,806
+2022,Montana,803
+2015,Maine,802
+2015,Nebraska,799
+2020,Rhode Island,787
+2014,Nebraska,781
+2016,Nebraska,772
+2014,Idaho,765
+2015,Idaho,746
+2005,Utah,743
+2020,Montana,729
+2019,Delaware,728
+2020,Delaware,722
+2018,Rhode Island,719
+2017,Rhode Island,718
+2014,New Hampshire,716
+2005,Nebraska,704
+2022,Hawaii,693
+2014,Maine,690
+2016,Rhode Island,675
+2019,Rhode Island,670
+2018,Delaware,662
+2019,Montana,657
+2021,Hawaii,656
+2020,Hawaii,654
+2019,Hawaii,651
+2015,Rhode Island,649
+2015,Montana,637
+2016,Montana,626
+2018,Hawaii,625
+2017,Delaware,608
+2005,Idaho,606
+2022,South Dakota,600
+2018,Montana,598
+2021,South Dakota,596
+2014,Rhode Island,592
+2021,Alaska,591
+2017,Hawaii,585
+2022,Vermont,584
+2014,Montana,581
+2017,Montana,579
+2005,Maine,579
+2016,Hawaii,577
+2020,South Dakota,569
+2022,Alaska,561
+2017,South Dakota,537
+2021,Vermont,536
+2015,Hawaii,536
+2005,Montana,524
+2019,South Dakota,517
+2016,Delaware,516
+2016,South Dakota,505
+2020,Vermont,481
+2005,New Hampshire,477
+2014,Hawaii,476
+2021,North Dakota,469
+2015,South Dakota,469
+2020,Alaska,464
+2014,South Dakota,462
+2018,South Dakota,452
+2022,North Dakota,451
+2015,Delaware,449
+2018,Vermont,444
+2016,Alaska,439
+2017,Alaska,436
+2005,Hawaii,436
+2019,Alaska,434
+2020,North Dakota,430
+2014,Delaware,425
+2022,Wyoming,411
+2019,Vermont,405
+2005,South Dakota,402
+2018,Alaska,400
+2015,Wyoming,400
+2017,Vermont,394
+2015,Alaska,388
+2019,Wyoming,384
+2021,Wyoming,381
+2014,Alaska,379
+2020,Wyoming,374
+2016,Vermont,372
+2019,North Dakota,371
+2016,North Dakota,371
+2016,Wyoming,371
+2015,North Dakota,368
+2014,Wyoming,361
+2018,North Dakota,358
+2018,Wyoming,353
+2014,North Dakota,349
+2017,Wyoming,348
+2015,Vermont,346
+2017,North Dakota,339
+2005,Rhode Island,334
+2014,Vermont,322
+2005,Alaska,313
+2005,Wyoming,302
+2005,Delaware,293
+2005,North Dakota,287
+2005,Vermont,272

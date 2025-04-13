@@ -1,0 +1,10 @@
+CO2 Emissions (Millions of tonnes) - this comes directly from our data
+PPP	- Price Parity, the value of 100$ in the state
+GDP	- the Gross Domestic Product of the state
+Average Salary - the average salary for those in the state
+Average Disposable Income - the average amount of disposable income (after taxes)
+Violent Crimes Committed - the amount of violent crimes each year (homicide/nonnegligent manslaughter, rape, aggravated assault, robbery)
+Unemployment Rate - the unemployment rate for the state in that year (as a percent)
+Hospital Count - the amount of recognized hospitals the state had in that year
+traffic fatalities -  per 100k people
+Air quality index - the air quality index for the state that year (on average based on the average for each county that reported the data)
