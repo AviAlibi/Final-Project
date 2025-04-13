@@ -27,7 +27,7 @@ match page:
         st.write("""
     This project leverages data on various factors that influence the quality of life across different states in the USA.\n
     Aiming to predict the best states to live in, in future years, based on metrics like population, CO2 emissions, crime rates, 
-    Cospital Counts, GDP, and more. Below is an overview of the dataset used for analysis:
+    Hospital Counts, GDP, and more. Below is an overview of the dataset used for analysis:
     """)
         
         st.subheader("Columns in the Dataset")
