@@ -60,7 +60,7 @@ match page:
             res = requests.get(f'http://{getenv('address')}/api/plot_feature',params={'state': state, 'feature': column})
             if res.status_code == 200:
                 img = Image.open(BytesIO(res.content))
-                st.image(img, caption=f'{column} in {state} over time.', use_column_width=True)
+                st.image(img, caption=f'{column} in {state} over time.', use_container_width=True)
             else:
                 st.write('Something went wrong when generating. Please try a different selection.')
 
