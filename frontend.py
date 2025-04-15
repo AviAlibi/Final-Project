@@ -11,16 +11,24 @@ load_dotenv()
 st.set_page_config(page_title="State Rankings", layout="wide")
 
 st.sidebar.title("Navigation")
-page = st.sidebar.radio('Pages:', ["Home", "The Data", "Objectives", "Methodology and Findings", "API", "About"])
+page = st.sidebar.radio('Pages:', ["Introduction", "The Data", "Methodology and Findings", "API", "Information"])
 
 match page:
-    case "Home":
+    case "Introduction":
         st.title("📊 State Rankings by Conditions")
         st.write(
             """
             What States are the best to live in, based on Data.
+
+            By: David J Chester
             """
         )
+
+        st.subheader('Objectives')
+        st.write("""The goal of this analysis and its predictions is to be able to say, with confidence, what State will be the best to live in, in the year 2030. Many factors are at play, as seen in \"The Data\".
+                \nWe will determine this by getting ranking the states per year, for each column 1 through 50. Then at the end we will add everyones numbers across the board, and the lowest number is the Best State to live in.
+                
+                \nHowever, lets also remember that our data is a prediction, and it is extremely hard to predict the future, especially considering that trends in the real world are ever evolving. Some of this data may be more incorrect then it is correct, but the only way to know for certain, is to wait and find out. With this in mind, lets take a look at how this data was predicted.""")
 
     case "The Data":
         st.title("🔬 The Data")
@@ -64,13 +72,6 @@ match page:
             else:
                 st.write('Something went wrong when generating. Please try a different selection.')
 
-    case "Objectives":
-        st.title("🔭 Objectives")
-        st.write("""The goal of this analysis and its predictions is to be able to say, with confidence, what State will be the best to live in, in the year 2030. Many factors are at play, as seen in \"The Data\".
-                \nWe will determine this by getting ranking the states per year, for each column 1 through 50. Then at the end we will add everyones numbers across the board, and the lowest number is the Best State to live in.
-                
-                \nHowever, lets also remember that our data is a prediction, and it is extremely hard to predict the future, especially considering that trends in the real world are ever evolving. Some of this data may be more incorrect then it is correct, but the only way to know for certain, is to wait and find out. With this in mind, lets take a look at how this data was predicted.""")
-
     case "Methodology and Findings":
         st.title('🧪 Methodology')
         st.write("""This data was assembled from 94 seperate files with each column being manually sorted, updated and modified to fit""")
@@ -85,7 +86,7 @@ match page:
 - **Violent Crimes Committed**: This column needed other items factored in: Population, Disposable Income (Criminality is tied to Poverty), Unemployment Rate (Higher unemployment rate = higher crime rate)""")
         
         st.subheader('Findings')
-        st.write('After predicting all of our data, I determined what would be done moving forward for each column, and created new columns to make some data more fair between states, for example, hospitals per capita, as populations would determine if more or less hospitals are necessary.')
+        st.write('After predicting all of our data using Linear Regression, and Polynomial Regression, I determined what would be done moving forward for each column, and created new columns to make some data more fair between states, for example, hospitals per capita, as populations would determine if more or less hospitals are necessary.')
         st.write('I then took all the rows and started converting their data to ratings for that specific data-type, 1-50, afterwards I summed the entire state data and the lowest is the winner.')
         st.write('The following are the Top 5 States for 2030, based on all of our predictions, as well as where they place in each data-type.')
         response = requests.get(f'http://{getenv('address')}/api/rank_year?year=2030')
@@ -108,7 +109,7 @@ match page:
         st.write(f'`http://{getenv('address')}/api/dl_predicted_states_data` - Download link for the predicted states dataset (not the ranked data)')
         st.write(f'`http://{getenv('address')}/api/dl_unpredicted_states_data` - Download link for the non predicted states dataset (for making your own models) (not the ranked data)')
 
-    case "About":
+    case "Information":
         st.title("ℹ️ Information")
         st.write("This website is hosted via `databasemart.com` on a 2 core/4gb RAM/60GB SSD Linux Ubuntu Server, and is not endorsed, nor approved by `Database Mart LLC`")
         st.write("The creator of this site instantiated this Linux Server as a Final Project Demonstration Environment. This server WILL BE SCRUBBED.")
