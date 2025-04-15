@@ -103,6 +103,6 @@ def root_api_download_predicted_states_data():
 @app.get('/api/dl_unpredicted_states_data')
 def root_api_download_unpredicted_states_data():
     try:
-        return FileResponse('./data/compiled_data/unpredicted_states_data.csv', media_type='text/csv', filename='predicted_states_data.csv')
+        return FileResponse('./data/compiled_data/unpredicted_states_data.csv', media_type='text/csv', filename='unpredicted_states_data.csv')
     except:
         return {'DownloadError': 'Something went wrong when downloading this file.'}
