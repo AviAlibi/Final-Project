@@ -101,13 +101,14 @@ match page:
                 st.image(img)
             except Exception as e:
                 st.error(f"Error rendering the image: {str(e)}")
-        # response = requests.get(f'http://{getenv("address")}/api/rank_year?year=2030')
-        # if response.status_code == 200:
-        #     data = response.json()
-        #     data = pd.DataFrame(data)
-        #     st.dataframe(data=data)
-        # else:
-        #     st.error('Failed to obtain the 2030 State Ranking Data from the API.')
+        if st.button('View the Rank Data'):
+            response = requests.get(f'http://{getenv("address")}/api/rank_year?year={year}')
+            if response.status_code == 200:
+                data = response.json()
+                data = pd.DataFrame(data)
+                st.dataframe(data=data)
+            else:
+                st.error('Failed to obtain the 2030 State Ranking Data from the API.')
 
     case "API":
         st.title('🤖 API Documentation')
