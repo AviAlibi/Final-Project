@@ -110,6 +110,8 @@ def get_feature_plot(state: str = Query(...), feature: str = Query(...)):
 
 @app.get('/api/generate_rankings_map')
 def root_api_generate_rankings_map(year: int):
+    if year < 2014 or year > 2030:
+        return JSONResponse({'Error': 'Year param must be between 2014 and 2030 (inclusive, inclusive)'})
     try:
         # Fetch the ranking data from the external API
         response = requests.get(f'http://localhost:8000/api/rank_year?year={year}')

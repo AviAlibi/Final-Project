@@ -12,7 +12,7 @@ load_dotenv()
 
 st.set_page_config(page_title="State Rankings", layout="wide")
 
-st.sidebar.title("Navigation")
+st.sidebar.title("🗺️ Navigation")
 page = st.sidebar.radio('Pages:', ["Introduction", "The Data", "Methodology", "Findings", "API", "Information"])
 
 match page:
@@ -87,6 +87,7 @@ match page:
                 st.write('Something went wrong when generating. Please try a different selection.')
         
     case "Findings":
+        st.title('🔍 Findings')
         st.write('After predicting all of our data using Linear Regression, and Polynomial Regression, I determined what would be done moving forward for each column, and created new columns to make some data more fair between states, for example, hospitals per capita, as populations would determine if more or less hospitals are necessary.')
         st.write('I then took all the rows and started converting their data to ratings for that specific data-type, 1-50, afterwards I summed the entire state data and the lowest is the winner.')
         
@@ -129,7 +130,7 @@ match page:
         st.write(f'`http://{getenv("address")}/api/plot_feature?state=Alabama&feature=Population` - Returns a pyplot image showcasing the States Feature over time for all data in the predicted dataset')
         st.write(f'`http://{getenv("address")}/api/dl_predicted_states_data` - Download link for the predicted states dataset (not the ranked data)')
         st.write(f'`http://{getenv("address")}/api/dl_unpredicted_states_data` - Download link for the non predicted states dataset (for making your own models) (not the ranked data)')
-        st.write(f'`http://{getenv("address")}/api/generate_rankings_map?year=2030` - View a Map of the United States color coded for rankings')
+        st.write(f'`http://{getenv("address")}/api/generate_rankings_map?year=2030` - View a Map of the United States color coded for rankings. Year param must be between 2014 and 2030 (inclusive, inclusive)')
 
     case "Information":
         st.title("ℹ️ Information")
