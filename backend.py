@@ -136,7 +136,7 @@ def root_api_generate_rankings_map(year:int):
             title=f"{year} Projected State Rankings"
         )
 
-        return JSONResponse(content=fig.to_json(), media_type="application/json")
+        return JSONResponse(content=fig.to_dict())
 
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
