@@ -5,6 +5,8 @@ from io import BytesIO
 import pandas as pd
 from os import getenv
 from dotenv import load_dotenv
+import plotly.express as px
+import plotly.graph_objects as go
 
 load_dotenv()
 
@@ -87,14 +89,24 @@ match page:
     case "Findings":
         st.write('After predicting all of our data using Linear Regression, and Polynomial Regression, I determined what would be done moving forward for each column, and created new columns to make some data more fair between states, for example, hospitals per capita, as populations would determine if more or less hospitals are necessary.')
         st.write('I then took all the rows and started converting their data to ratings for that specific data-type, 1-50, afterwards I summed the entire state data and the lowest is the winner.')
-        st.write('The following are the Top 5 States for 2030, based on all of our predictions, as well as where they place in each data-type.')
-        response = requests.get(f'http://{getenv("address")}/api/rank_year?year=2030')
+        
+        
+        st.subheader("Predicted State Rankings")
+        year = st.number_input("Select Year", min_value=2014, max_value=2030, value=2030)
+        api_url = f"http://{getenv('address')}/api/generate_rankings_map?year={year}"
+        response = requests.get(api_url)
         if response.status_code == 200:
-            data = response.json()
-            data = pd.DataFrame(data)
-            st.dataframe(data=data)
+            fig = go.Figure(response.json())
+            st.plotly_chart(fig)
         else:
-            st.error('Failed to obtain the 2030 State Ranking Data from the API.')
+            st.error(f"Error when obtaining or rendering the {year} ranking data, is {year} valid?")
+        # response = requests.get(f'http://{getenv("address")}/api/rank_year?year=2030')
+        # if response.status_code == 200:
+        #     data = response.json()
+        #     data = pd.DataFrame(data)
+        #     st.dataframe(data=data)
+        # else:
+        #     st.error('Failed to obtain the 2030 State Ranking Data from the API.')
 
     case "API":
         st.title('🤖 API Documentation')
