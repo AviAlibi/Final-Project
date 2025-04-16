@@ -137,4 +137,4 @@ match page:
         st.title("ℹ️ Information")
         st.write("This website is hosted via `databasemart.com` on a 2 core/4gb RAM/60GB SSD Linux Ubuntu Server, and is not endorsed, nor approved by `Database Mart LLC`")
         st.write("The creator of this site instantiated this Linux Server as a Final Project Demonstration Environment. This server WILL BE SCRUBBED.")
-        st.write("All data for this server will be made available within a Github repository before its closing. The GitHub Publisher is: `AviAlibi`")
+        st.write("All data for this server may be found at the following github repository: https://github.com/AviAlibi/Final-Project")
