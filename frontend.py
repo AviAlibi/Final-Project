@@ -96,7 +96,8 @@ match page:
         api_url = f"http://{getenv('address')}/api/generate_rankings_map?year={year}"
         response = requests.get(api_url)
         if response.status_code == 200:
-            fig = go.Figure(response.json())
+            ploty_json = response.json()
+            fig = go.Figure(ploty_json)
             st.plotly_chart(fig)
         else:
             st.error(f"Error when obtaining or rendering the {year} ranking data, is {year} valid?")
