@@ -8,6 +8,7 @@ from io import BytesIO
 import matplotlib.pyplot as plt
 from func import rank_states
 import plotly.express as px
+import requests
 
 app = FastAPI()
 app.mount('/img', StaticFiles(directory="img"), name='img')
@@ -110,33 +111,20 @@ def get_feature_plot(state: str = Query(...), feature: str = Query(...)):
 @app.get('/api/generate_rankings_map')
 def root_api_generate_rankings_map(year: int):
     try:
-        # Copy the data for the selected year
-        df_year = STATES[STATES["Year"] == year].copy()
-
-        if df_year.empty:
+        # Fetch the ranking data from the external API
+        response = requests.get(f'http://localhost:8000/api/rank_year?year={year}')
+    
+        if response.status_code != 200:
+            return {"error": f"Failed to fetch data for year {year}"}
+        data = response.json()
+        if not data:
             return {"error": f"No data found for year {year}"}
-
-        # Define scoring columns based on your data
-        scoring_columns = list(STATES.columns)[3:]
-        missing_cols = [col for col in scoring_columns if col not in df_year.columns]
-        if missing_cols:
-            return {"error": f"Missing columns: {missing_cols}"}
-
-        # Calculate the final score (sum of the scoring columns)
-        df_year["Score"] = df_year[scoring_columns].sum(axis=1)
-
-        # Normalize the final score to a 1-50 ranking (lower scores are better)
-        df_year["Rank"] = pd.qcut(df_year["Score"], 50, labels=False) + 1  # 1 is the best rank, 50 is the worst
-
-        # Add columns for extra details to be displayed on hover
-        df_year["State Name"] = df_year["State"]  # Add state name
-        df_year["Total Score"] = df_year["Score"]  # Add total score
-
-        # Map the state codes (assuming you have a map for state codes)
+        df_year = pd.DataFrame(data)[['State', 'Final Score']]
+        if 'State' not in df_year.columns or 'Final Score' not in df_year.columns:
+            return {"error": "Missing required columns in the data"}
+        df_year["Rank"] = pd.qcut(df_year["Final Score"], 50, labels=False) + 1  # 1 is the best rank, 50 is the worst
         df_year["State Code"] = df_year["State"].map(state_code_map)
         df_year = df_year.dropna(subset=["State Code"])
-
-        # Create the choropleth map using the "Rank" for coloring
         fig = px.choropleth(
             df_year,
             locations="State Code",
@@ -146,10 +134,10 @@ def root_api_generate_rankings_map(year: int):
             scope="usa",
             labels={"Rank": "Rank (1 = Best)"},
             title=f"{year} Projected State Rankings",
-            hover_name="State Name",  # Show state name on hover
+            hover_name="State",  # Show state name on hover
             hover_data={
-                "State Name": True,
-                "Total Score": True,
+                "State": True,
+                "Final Score": True,
                 "Rank": True,
                 # You can add more columns here as needed for hover data
             }
