@@ -611,7 +611,7 @@ def predict_missing_column_by_state(df, column, degree_dict=None, default_degree
                     column: value
                 }
                 df = pd.concat([df, pd.DataFrame([new_row])],
-                               ignore_index=True)
+                                ignore_index=True)
 
     # Re-sort the full dataframe
     df = df.sort_values(['State', 'Year']).reset_index(drop=True)

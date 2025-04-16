@@ -72,12 +72,12 @@ match page:
 - **Violent Crimes Committed**: This column needed other items factored in: Population, Disposable Income (Criminality is tied to Poverty), Unemployment Rate (Higher unemployment rate = higher crime rate)""")
         
         st.subheader("Explore the Data")
-        states = requests.get(f'http://{getenv('address')}/api/fetch_states')
-        columns = requests.get(f'http://{getenv('address')}/api/fetch_columns')
+        states = requests.get(f'http://{getenv("address")}/api/fetch_states')
+        columns = requests.get(f'http://{getenv("address")}/api/fetch_columns')
         state = st.selectbox("Select a state to explore:", states.json()['States'])
         column = st.selectbox("Select the column to have displayed", columns.json()['Columns'][1:])
         if st.button('Generate Image'):
-            res = requests.get(f'http://{getenv('address')}/api/plot_feature',params={'state': state, 'feature': column})
+            res = requests.get(f'http://{getenv("address")}/api/plot_feature',params={'state': state, 'feature': column})
             if res.status_code == 200:
                 img = Image.open(BytesIO(res.content))
                 st.image(img, caption=f'{column} in {state} over time.', use_container_width=True)
@@ -88,7 +88,7 @@ match page:
         st.write('After predicting all of our data using Linear Regression, and Polynomial Regression, I determined what would be done moving forward for each column, and created new columns to make some data more fair between states, for example, hospitals per capita, as populations would determine if more or less hospitals are necessary.')
         st.write('I then took all the rows and started converting their data to ratings for that specific data-type, 1-50, afterwards I summed the entire state data and the lowest is the winner.')
         st.write('The following are the Top 5 States for 2030, based on all of our predictions, as well as where they place in each data-type.')
-        response = requests.get(f'http://{getenv('address')}/api/rank_year?year=2030')
+        response = requests.get(f'http://{getenv("address")}/api/rank_year?year=2030')
         if response.status_code == 200:
             data = response.json()
             data = pd.DataFrame(data)
@@ -100,13 +100,13 @@ match page:
         st.title('🤖 API Documentation')
         st.write('All requests are `GET` requests. There are no api_keys or request_limits.')
 
-        st.write(f'`http://{getenv('address')}/api` - Test endpoint to confirm if the api is active')
-        st.write(f'`http://{getenv('address')}/api/fetch_columns` - Returns json of each column in the predicted dataset')
-        st.write(f'`http://{getenv('address')}/api/fetch_states` - Returns json of each state in the predicted dataset')
-        st.write(f'`http://{getenv('address')}/api/rank_year?year=2017` - Returns a jsonified dataframe with the rankings for each state. Year param must be between 2014 and 2030 (inclusive, inclusive)')
-        st.write(f'`http://{getenv('address')}/api/plot_feature?state=Alabama&feature=Population` - Returns a pyplot image showcasing the States Feature over time for all data in the predicted dataset')
-        st.write(f'`http://{getenv('address')}/api/dl_predicted_states_data` - Download link for the predicted states dataset (not the ranked data)')
-        st.write(f'`http://{getenv('address')}/api/dl_unpredicted_states_data` - Download link for the non predicted states dataset (for making your own models) (not the ranked data)')
+        st.write(f'`http://{getenv("address")}/api` - Test endpoint to confirm if the api is active')
+        st.write(f'`http://{getenv("address")}/api/fetch_columns` - Returns json of each column in the predicted dataset')
+        st.write(f'`http://{getenv("address")}/api/fetch_states` - Returns json of each state in the predicted dataset')
+        st.write(f'`http://{getenv("address")}/api/rank_year?year=2017` - Returns a jsonified dataframe with the rankings for each state. Year param must be between 2014 and 2030 (inclusive, inclusive)')
+        st.write(f'`http://{getenv("address")}/api/plot_feature?state=Alabama&feature=Population` - Returns a pyplot image showcasing the States Feature over time for all data in the predicted dataset')
+        st.write(f'`http://{getenv("address")}/api/dl_predicted_states_data` - Download link for the predicted states dataset (not the ranked data)')
+        st.write(f'`http://{getenv("address")}/api/dl_unpredicted_states_data` - Download link for the non predicted states dataset (for making your own models) (not the ranked data)')
 
     case "Information":
         st.title("ℹ️ Information")
