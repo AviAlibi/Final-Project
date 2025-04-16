@@ -11,7 +11,7 @@ load_dotenv()
 st.set_page_config(page_title="State Rankings", layout="wide")
 
 st.sidebar.title("Navigation")
-page = st.sidebar.radio('Pages:', ["Introduction", "The Data", "Methodology and Findings", "API", "Information"])
+page = st.sidebar.radio('Pages:', ["Introduction", "The Data", "Methodology", "Findings", "API", "Information"])
 
 match page:
     case "Introduction":
@@ -59,20 +59,8 @@ match page:
         - **Violent Crimes Per Capita**: The amount of violent crimes for every 100,000 people (per capita)
         - **Hospitals Per Capita**: The amount of hospitals available for every 100,000 people (per capita).
         """)
-        st.subheader("Explore the Data")
-        states = requests.get(f'http://{getenv('address')}/api/fetch_states')
-        columns = requests.get(f'http://{getenv('address')}/api/fetch_columns')
-        state = st.selectbox("Select a state to explore:", states.json()['States'])
-        column = st.selectbox("Select the column to have displayed", columns.json()['Columns'][1:])
-        if st.button('Generate Image'):
-            res = requests.get(f'http://{getenv('address')}/api/plot_feature',params={'state': state, 'feature': column})
-            if res.status_code == 200:
-                img = Image.open(BytesIO(res.content))
-                st.image(img, caption=f'{column} in {state} over time.', use_container_width=True)
-            else:
-                st.write('Something went wrong when generating. Please try a different selection.')
 
-    case "Methodology and Findings":
+    case "Methodology":
         st.title('🧪 Methodology')
         st.write("""This data was assembled from 94 seperate files with each column being manually sorted, updated and modified to fit""")
         st.subheader('Populations')
@@ -85,7 +73,20 @@ match page:
 - **Hospital Count**: The polynomial provided extreme drops and rises in Hospital Counts as well as predicting partial values for the hospitals (For example, we cant have 120.3462 hospitals) 
 - **Violent Crimes Committed**: This column needed other items factored in: Population, Disposable Income (Criminality is tied to Poverty), Unemployment Rate (Higher unemployment rate = higher crime rate)""")
         
-        st.subheader('Findings')
+        st.subheader("Explore the Data")
+        states = requests.get(f'http://{getenv('address')}/api/fetch_states')
+        columns = requests.get(f'http://{getenv('address')}/api/fetch_columns')
+        state = st.selectbox("Select a state to explore:", states.json()['States'])
+        column = st.selectbox("Select the column to have displayed", columns.json()['Columns'][1:])
+        if st.button('Generate Image'):
+            res = requests.get(f'http://{getenv('address')}/api/plot_feature',params={'state': state, 'feature': column})
+            if res.status_code == 200:
+                img = Image.open(BytesIO(res.content))
+                st.image(img, caption=f'{column} in {state} over time.', use_container_width=True)
+            else:
+                st.write('Something went wrong when generating. Please try a different selection.')
+        
+    case "Findings":
         st.write('After predicting all of our data using Linear Regression, and Polynomial Regression, I determined what would be done moving forward for each column, and created new columns to make some data more fair between states, for example, hospitals per capita, as populations would determine if more or less hospitals are necessary.')
         st.write('I then took all the rows and started converting their data to ratings for that specific data-type, 1-50, afterwards I summed the entire state data and the lowest is the winner.')
         st.write('The following are the Top 5 States for 2030, based on all of our predictions, as well as where they place in each data-type.')
