@@ -104,7 +104,7 @@ match page:
             except Exception as e:
                 st.error(f"Error rendering the plotly chart: {str(e)}")
         else:
-            st.error(f"Error when obtaining or rendering the {year} ranking data, is {year} valid?")
+            st.error(f"Error: {response.status_code}")
         # response = requests.get(f'http://{getenv("address")}/api/rank_year?year=2030')
         # if response.status_code == 200:
         #     data = response.json()
