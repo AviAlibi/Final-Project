@@ -128,6 +128,10 @@ def root_api_generate_rankings_map(year: int):
         # Normalize the final score to a 1-50 ranking (lower scores are better)
         df_year["Rank"] = pd.qcut(df_year["Score"], 50, labels=False) + 1  # 1 is the best rank, 50 is the worst
 
+        # Add columns for extra details to be displayed on hover
+        df_year["State Name"] = df_year["State"]  # Add state name
+        df_year["Total Score"] = df_year["Score"]  # Add total score
+
         # Map the state codes (assuming you have a map for state codes)
         df_year["State Code"] = df_year["State"].map(state_code_map)
         df_year = df_year.dropna(subset=["State Code"])
@@ -141,7 +145,14 @@ def root_api_generate_rankings_map(year: int):
             color_continuous_scale="Viridis_r",  # Use a reversed scale if you want the lowest rank as green
             scope="usa",
             labels={"Rank": "Rank (1 = Best)"},
-            title=f"{year} Projected State Rankings"
+            title=f"{year} Projected State Rankings",
+            hover_name="State Name",  # Show state name on hover
+            hover_data={
+                "State Name": True,
+                "Total Score": True,
+                "Rank": True,
+                # You can add more columns here as needed for hover data
+            }
         )
 
         # Save the figure to a BytesIO buffer as a PNG image
