@@ -108,18 +108,17 @@ def get_feature_plot(state: str = Query(...), feature: str = Query(...)):
     return Response(content=buf.read(), media_type="image/png")
 
 @app.get('/api/generate_rankings_map')
-def root_api_generate_rankings_map(year:int):
+def root_api_generate_rankings_map(year: int):
     try:
         df_year = STATES[STATES["Year"] == year].copy()
 
         if df_year.empty:
-            return JSONResponse(content={"error": f"No data found for year {year}"}, status_code=404)
+            return {"error": f"No data found for year {year}"}
 
         scoring_columns = list(STATES.columns)[3:]
-
         missing_cols = [col for col in scoring_columns if col not in df_year.columns]
         if missing_cols:
-            return JSONResponse(content={"error": f"Missing columns: {missing_cols}"}, status_code=500)
+            return {"error": f"Missing columns: {missing_cols}"}
 
         df_year["Score"] = df_year[scoring_columns].sum(axis=1)
         df_year["State Code"] = df_year["State"].map(state_code_map)
@@ -136,10 +135,16 @@ def root_api_generate_rankings_map(year:int):
             title=f"{year} Projected State Rankings"
         )
 
-        return JSONResponse(content=fig.to_dict())
+        # Save the figure to a BytesIO buffer as a PNG image
+        buf = BytesIO()
+        fig.write_image(buf, format="png")
+        buf.seek(0)
+
+        # Return the image in the response
+        return Response(content=buf.read(), media_type="image/png")
 
     except Exception as e:
-        return JSONResponse(content={"error": str(e)}, status_code=500)
+        return {"error": str(e)}
 
 @app.get('/api/dl_predicted_states_data')
 def root_api_download_predicted_states_data():
