@@ -1,0 +1,100 @@
++--------------------------+
+| Start                    |
++--------------------------+
+            |
+            v
++--------------------------+
+| Copy DataFrame (`df`)    |
++--------------------------+
+            |
+            v
++--------------------------+
+| Get unique states from   |
+| `df['State']`            |
++--------------------------+
+            |
+            v
++--------------------------+
+| Check if column exists   |
+| in DataFrame             |
++--------------------------+
+            |
+            v
+   No      |      Yes
+    |      v        |
+    v +-------------------------+
+  Raise ValueError             |
+     |                         |
+     +-------------------------+
+            |
+            v
++--------------------------+
+| Loop through states      |
+| (for each state)         |
++--------------------------+
+            |
+            v
++--------------------------+
+| Get state-specific data  |
+| (filter by state)        |
++--------------------------+
+            |
+            v
++--------------------------+
+| Check if column is NaN   |
+| for all years in state   |
++--------------------------+
+   Yes     |      No
+    |      v        |
+    v +-------------------------+
+  Skip to next state         |
+     |                        |
+     +------------------------+
+            |
+            v
++--------------------------+
+| Get last valid year with |
+| data in the column       |
++--------------------------+
+            |
+            v
++--------------------------+
+| Generate prediction years|
+| (from last year + 1 to   |
+| forecast_year)           |
++--------------------------+
+            |
+            v
++--------------------------+
+| Check if prediction years|
+| are available            |
++--------------------------+
+            |
+            v
++--------------------------+
+| Fit polynomial regression|
+| on existing data         |
++--------------------------+
+            |
+            v
++--------------------------+
+| Predict missing values   |
+| for prediction years     |
++--------------------------+
+            |
+            v
++--------------------------+
+| Insert predicted values  |
+| into the DataFrame       |
++--------------------------+
+            |
+            v
++--------------------------+
+| Re-sort the DataFrame    |
+| by state and year        |
++--------------------------+
+            |
+            v
++--------------------------+
+| Return updated DataFrame |
++--------------------------+
