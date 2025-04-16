@@ -110,28 +110,37 @@ def get_feature_plot(state: str = Query(...), feature: str = Query(...)):
 @app.get('/api/generate_rankings_map')
 def root_api_generate_rankings_map(year: int):
     try:
+        # Copy the data for the selected year
         df_year = STATES[STATES["Year"] == year].copy()
 
         if df_year.empty:
             return {"error": f"No data found for year {year}"}
 
+        # Define scoring columns based on your data
         scoring_columns = list(STATES.columns)[3:]
         missing_cols = [col for col in scoring_columns if col not in df_year.columns]
         if missing_cols:
             return {"error": f"Missing columns: {missing_cols}"}
 
+        # Calculate the final score (sum of the scoring columns)
         df_year["Score"] = df_year[scoring_columns].sum(axis=1)
+
+        # Normalize the final score to a 1-50 ranking (lower scores are better)
+        df_year["Rank"] = pd.qcut(df_year["Score"], 50, labels=False) + 1  # 1 is the best rank, 50 is the worst
+
+        # Map the state codes (assuming you have a map for state codes)
         df_year["State Code"] = df_year["State"].map(state_code_map)
         df_year = df_year.dropna(subset=["State Code"])
 
+        # Create the choropleth map using the "Rank" for coloring
         fig = px.choropleth(
             df_year,
             locations="State Code",
             locationmode="USA-states",
-            color="Score",
-            color_continuous_scale="Viridis_r",
+            color="Rank",
+            color_continuous_scale="Viridis_r",  # Use a reversed scale if you want the lowest rank as green
             scope="usa",
-            labels={"Score": "Score (Lower is Better)"},
+            labels={"Rank": "Rank (1 = Best)"},
             title=f"{year} Projected State Rankings"
         )
 
