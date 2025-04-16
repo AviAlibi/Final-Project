@@ -113,18 +113,34 @@ def root_api_generate_rankings_map(year: int):
     try:
         # Fetch the ranking data from the external API
         response = requests.get(f'http://localhost:8000/api/rank_year?year={year}')
-    
+        
         if response.status_code != 200:
             return {"error": f"Failed to fetch data for year {year}"}
+
+        # Parse the JSON response
         data = response.json()
+
         if not data:
             return {"error": f"No data found for year {year}"}
+
+        # Convert the data into a DataFrame with only the necessary columns
         df_year = pd.DataFrame(data)[['State', 'Final Score']]
+
+        # Check if any of the required columns are missing
         if 'State' not in df_year.columns or 'Final Score' not in df_year.columns:
             return {"error": "Missing required columns in the data"}
-        df_year["Rank"] = pd.qcut(df_year["Final Score"], 50, labels=False) + 1  # 1 is the best rank, 50 is the worst
+
+        # Sort the states by Final Score in ascending order (lower scores are better)
+        df_year = df_year.sort_values(by='Final Score', ascending=True)
+
+        # Assign ranks based on the sorted order
+        df_year["Rank"] = range(1, len(df_year) + 1)  # Assign rank 1 to the state with the lowest Final Score
+
+        # Map the state codes (assuming you have a map for state codes)
         df_year["State Code"] = df_year["State"].map(state_code_map)
         df_year = df_year.dropna(subset=["State Code"])
+
+        # Create the choropleth map using the "Rank" for coloring
         fig = px.choropleth(
             df_year,
             locations="State Code",
