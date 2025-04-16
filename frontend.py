@@ -17,6 +17,7 @@ page = st.sidebar.radio('Pages:', ["Introduction", "The Data", "Methodology", "F
 
 match page:
     case "Introduction":
+        st.image('./img/banner_art.jpg', width=None)
         st.title("📊 State Rankings by Conditions")
         st.write(
             """
