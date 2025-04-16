@@ -129,6 +129,7 @@ match page:
         st.write(f'`http://{getenv("address")}/api/plot_feature?state=Alabama&feature=Population` - Returns a pyplot image showcasing the States Feature over time for all data in the predicted dataset')
         st.write(f'`http://{getenv("address")}/api/dl_predicted_states_data` - Download link for the predicted states dataset (not the ranked data)')
         st.write(f'`http://{getenv("address")}/api/dl_unpredicted_states_data` - Download link for the non predicted states dataset (for making your own models) (not the ranked data)')
+        st.write(f'`http://{getenv("address")}/api/generate_rankings_map?year=2030` - View a Map of the United States color coded for rankings')
 
     case "Information":
         st.title("ℹ️ Information")

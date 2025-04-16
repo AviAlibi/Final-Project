@@ -146,7 +146,7 @@ def root_api_generate_rankings_map(year: int):
             locations="State Code",
             locationmode="USA-states",
             color="Rank",
-            color_continuous_scale="Viridis_r",  # Use a reversed scale if you want the lowest rank as green
+            color_continuous_scale="RdYlGn_r",  # Use a reversed scale if you want the lowest rank as green
             scope="usa",
             labels={"Rank": "Rank (1 = Best)"},
             title=f"{year} Projected State Rankings",
