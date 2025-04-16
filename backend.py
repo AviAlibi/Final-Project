@@ -109,40 +109,37 @@ def get_feature_plot(state: str = Query(...), feature: str = Query(...)):
 
 @app.get('/api/generate_rankings_map')
 def root_api_generate_rankings_map(year:int):
-    df_year = STATES[STATES["Year"] == year].copy()
+    try:
+        df_year = STATES[STATES["Year"] == year].copy()
 
-    if df_year.empty:
-        return JSONResponse(content={"error": f"No data found for year {year}"}, status_code=404)
+        if df_year.empty:
+            return JSONResponse(content={"error": f"No data found for year {year}"}, status_code=404)
 
-    # List the columns you want to include in the score
-    scoring_columns = list(STATES.columns)[3:]
+        scoring_columns = list(STATES.columns)[3:]
 
-    # Ensure all needed columns exist
-    missing_cols = [col for col in scoring_columns if col not in df_year.columns]
-    if missing_cols:
-        return JSONResponse(content={"error": f"Missing columns: {missing_cols}"}, status_code=500)
+        missing_cols = [col for col in scoring_columns if col not in df_year.columns]
+        if missing_cols:
+            return JSONResponse(content={"error": f"Missing columns: {missing_cols}"}, status_code=500)
 
-    # Calculate score (lower is better)
-    df_year["Score"] = df_year[scoring_columns].sum(axis=1)
-    df_year["State Code"] = df_year["State"].map(state_code_map)
+        df_year["Score"] = df_year[scoring_columns].sum(axis=1)
+        df_year["State Code"] = df_year["State"].map(state_code_map)
+        df_year = df_year.dropna(subset=["State Code"])
 
-    # Filter out states without valid code
-    df_year = df_year.dropna(subset=["State Code"])
+        fig = px.choropleth(
+            df_year,
+            locations="State Code",
+            locationmode="USA-states",
+            color="Score",
+            color_continuous_scale="Viridis_r",
+            scope="usa",
+            labels={"Score": "Score (Lower is Better)"},
+            title=f"{year} Projected State Rankings"
+        )
 
-    # Build choropleth map
-    fig = px.choropleth(
-        df_year,
-        locations="State Code",
-        locationmode="USA-states",
-        color="Score",
-        color_continuous_scale="Viridis_r",
-        scope="usa",
-        labels={"Score": "Score (Lower is Better)"},
-        title=f"{year} Projected State Rankings"
-    )
+        return JSONResponse(content=fig.to_dict())
 
-    # Return Plotly figure as JSON
-    return JSONResponse(content=fig.to_dict())
+    except Exception as e:
+        return JSONResponse(content={"error": str(e)}, status_code=500)
 
 @app.get('/api/dl_predicted_states_data')
 def root_api_download_predicted_states_data():
