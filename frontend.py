@@ -26,10 +26,8 @@ match page:
 
         st.subheader('Objectives')
         st.write("""The goal of this analysis and its predictions is to be able to say, with confidence, what State will be the best to live in, in the year 2030. Many factors are at play, as seen in \"The Data\".
-                \nWe will determine this by getting ranking the states per year, for each column 1 through 50. Then at the end we will add everyones numbers across the board, and the lowest number is the Best State to live in.
-                
-                \nHowever, lets also remember that our data is a prediction, and it is extremely hard to predict the future, especially considering that trends in the real world are ever evolving. Some of this data may be more incorrect then it is correct, but the only way to know for certain, is to wait and find out. With this in mind, lets take a look at how this data was predicted.""")
-
+                \nWe will determine this by ranking the states per year, for each column 1 through 50. Then at the end we will add everyones rankings across the board, and the lowest number is the Best State to live in.
+                """)
     case "The Data":
         st.title("🔬 The Data")
         st.write("""
