@@ -104,7 +104,7 @@ match page:
 
         if 'data_visible' not in st.session_state:
             st.session_state['data_visible'] = False
-        if st.button('View the Rank Data'):
+        if st.button('Toggle Raw Rank Data'):
             # Toggle the visibility state
             st.session_state['data_visible'] = not st.session_state['data_visible']
             
