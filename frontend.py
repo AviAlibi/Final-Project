@@ -101,14 +101,22 @@ match page:
                 st.image(img)
             except Exception as e:
                 st.error(f"Error rendering the image: {str(e)}")
+
+        if 'data_visible' not in st.session_state:
+            st.session_state['data_visible'] = False
         if st.button('View the Rank Data'):
-            response = requests.get(f'http://{getenv("address")}/api/rank_year?year={year}')
-            if response.status_code == 200:
-                data = response.json()
-                data = pd.DataFrame(data)
-                st.dataframe(data=data)
-            else:
-                st.error('Failed to obtain the 2030 State Ranking Data from the API.')
+            # Toggle the visibility state
+            st.session_state['data_visible'] = not st.session_state['data_visible']
+            
+            if st.session_state['data_visible']:
+                # Fetch the data from the API when the button is clicked and toggled
+                response = requests.get(f'http://{getenv("address")}/api/rank_year?year={year}')
+                if response.status_code == 200:
+                    data = response.json()
+                    data = pd.DataFrame(data)
+                    st.dataframe(data=data)
+                else:
+                    st.error('Failed to obtain the 2030 State Ranking Data from the API.')
 
     case "API":
         st.title('🤖 API Documentation')
