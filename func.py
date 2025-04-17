@@ -3,11 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from typing import Tuple
-# from sklearn.model_selection import train_test_split
-# from sklearn.ensemble import RandomForestRegressor
-# from sklearn.preprocessing import OneHotEncoder
-# from sklearn.compose import ColumnTransformer
-# from sklearn.pipeline import Pipeline
+from statsmodels.tsa.arima.model import ARIMA
+# from statsmodels.tools.sm_exceptions import ConvergenceWarning
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 import seaborn as sns
@@ -557,7 +554,67 @@ def get_all_aqi_files():
         except:
             print(f'{year}: FAIL FAIL FAIL')
 
-def predict_missing_column_by_state(df, column, degree_dict=None, default_degree=2, forecast_year=2030):
+# def predict_missing_column_by_state(df, column, degree_dict=None, default_degree=2, forecast_year=2030):
+#     df = df.copy()
+#     states = df['State'].unique()
+
+#     # Ensure the column exists in the dataframe
+#     if column not in df.columns:
+#         raise ValueError(f"Column '{column}' not found in DataFrame.")
+
+#     for state in states:
+#         state_df = df[df['State'] == state].sort_values('Year')
+
+#         # Skip if the column is entirely NaN for the given state
+#         if state_df[column].dropna().empty:
+#             continue
+
+#         # Find the last year with data
+#         last_valid_idx = state_df[column].last_valid_index()
+#         last_valid_year = state_df.loc[last_valid_idx, 'Year']
+
+#         # Define years to predict
+#         pred_years = np.arange(last_valid_year + 1, forecast_year + 1)
+#         if len(pred_years) == 0:
+#             continue
+
+#         # Fit polynomial on existing data
+#         existing = state_df.dropna(subset=[column])
+#         X_train = existing['Year'].values.reshape(-1, 1)
+#         y_train = existing[column].values
+
+#         degree = degree_dict.get(state, default_degree) if degree_dict else default_degree
+#         poly = PolynomialFeatures(degree)
+#         X_poly = poly.fit_transform(X_train)
+
+#         model = LinearRegression()
+#         model.fit(X_poly, y_train)
+
+#         # Predict
+#         X_pred = poly.transform(pred_years.reshape(-1, 1))
+#         y_pred = model.predict(X_pred)
+
+#         # Insert predictions back into the DataFrame
+#         for year, value in zip(pred_years, y_pred):
+#             mask = (df['State'] == state) & (df['Year'] == year)
+#             if not df[mask].empty:
+#                 df.loc[mask, column] = value
+#             else:
+#                 # Create new row if year didn't exist yet
+#                 new_row = {
+#                     'State': state,
+#                     'Year': year,
+#                     'Population': np.nan,  # or estimate separately
+#                     column: value
+#                 }
+#                 df = pd.concat([df, pd.DataFrame([new_row])],
+#                                 ignore_index=True)
+
+#     # Re-sort the full dataframe
+#     df = df.sort_values(['State', 'Year']).reset_index(drop=True)
+#     return df
+
+def predict_missing_column_by_state(df, column, arima_order=(1, 1, 1), forecast_year=2030):
     df = df.copy()
     states = df['State'].unique()
 
@@ -572,54 +629,47 @@ def predict_missing_column_by_state(df, column, degree_dict=None, default_degree
         if state_df[column].dropna().empty:
             continue
 
-        # Find the last year with data
-        last_valid_idx = state_df[column].last_valid_index()
-        last_valid_year = state_df.loc[last_valid_idx, 'Year']
+        existing = state_df.dropna(subset=[column])
+        years = existing['Year'].values
+        values = existing[column].values
 
-        # Define years to predict
-        pred_years = np.arange(last_valid_year + 1, forecast_year + 1)
-        if len(pred_years) == 0:
+        # Ensure we have enough data for ARIMA
+        if len(values) < 4:
             continue
 
-        # Fit polynomial on existing data
-        existing = state_df.dropna(subset=[column])
-        X_train = existing['Year'].values.reshape(-1, 1)
-        y_train = existing[column].values
+        try:
+            model = ARIMA(values, order=arima_order)
+            fitted = model.fit()
 
-        degree = degree_dict.get(state, default_degree) if degree_dict else default_degree
-        poly = PolynomialFeatures(degree)
-        X_poly = poly.fit_transform(X_train)
+            last_year = years[-1]
+            pred_years = np.arange(last_year + 1, forecast_year + 1)
+            n_periods = len(pred_years)
+            if n_periods == 0:
+                continue
 
-        model = LinearRegression()
-        model.fit(X_poly, y_train)
+            forecast = fitted.forecast(steps=n_periods)
 
-        # Predict
-        X_pred = poly.transform(pred_years.reshape(-1, 1))
-        y_pred = model.predict(X_pred)
+            # Insert predictions back into the DataFrame
+            for year, value in zip(pred_years, forecast):
+                mask = (df['State'] == state) & (df['Year'] == year)
+                if not df[mask].empty:
+                    df.loc[mask, column] = value
+                else:
+                    new_row = {
+                        'State': state,
+                        'Year': year,
+                        'Population': np.nan,  # optional, or estimate separately
+                        column: value
+                    }
+                    df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
 
-        # Insert predictions back into the DataFrame
-        for year, value in zip(pred_years, y_pred):
-            mask = (df['State'] == state) & (df['Year'] == year)
-            if not df[mask].empty:
-                df.loc[mask, column] = value
-            else:
-                # Create new row if year didn't exist yet
-                new_row = {
-                    'State': state,
-                    'Year': year,
-                    'Population': np.nan,  # or estimate separately
-                    column: value
-                }
-                df = pd.concat([df, pd.DataFrame([new_row])],
-                                ignore_index=True)
+        except Exception as e:
+            print(f"ARIMA failed for state {state}: {e}")
+            continue
 
     # Re-sort the full dataframe
     df = df.sort_values(['State', 'Year']).reset_index(drop=True)
     return df
-
-import numpy as np
-import pandas as pd
-from sklearn.linear_model import LinearRegression
 
 def predict_hospital_counts(
     df,
