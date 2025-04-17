@@ -71,8 +71,8 @@ match page:
         st.image(image='./img/predicted_pops_2020_vs_2030.png', width=1000)
 
         st.subheader('Predictions')
-        st.write("""All of our predictions use the same polynomial format, and required hours of tweaking to get a reasonable set of trends, some states had to be manually adjusted to avoid extremely outrageous outputs. Two columns do not use the same model:
-- **Hospital Count**: The polynomial provided extreme drops and rises in Hospital Counts as well as predicting partial values for the hospitals (For example, we cant have 120.3462 hospitals) 
+        st.write("""All of our predictions use the same ARIMA format. Two columns do not use the same model:
+- **Hospital Count**: The ARIMA provided extreme drops and rises in Hospital Counts as well as predicting partial values for the hospitals (For example, we cant have 120.3462 hospitals) 
 - **Violent Crimes Committed**: This column needed other items factored in: Population, Disposable Income (Criminality is tied to Poverty), Unemployment Rate (Higher unemployment rate = higher crime rate)""")
         
         st.subheader("Explore the Data")
