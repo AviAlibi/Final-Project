@@ -90,7 +90,7 @@ match page:
         
     case "Findings":
         st.title('🔍 Findings')
-        st.write('After predicting all of our data using Linear Regression, and Polynomial Regression, I determined what would be done moving forward for each column, and created new columns to make some data more fair between states, for example, hospitals per capita, as populations would determine if more or less hospitals are necessary.')
+        st.write('After predicting all of our data using Linear Regression, and ARIMA models, I determined what would be done moving forward for each column, and created new columns to make some data more fair between states, for example, hospitals per capita, as populations would determine if more or less hospitals are necessary.')
         st.write('I then took all the rows and started converting their data to ratings for that specific data-type, 1-50, afterwards I summed the entire state data and the lowest is the winner.')
         
         
